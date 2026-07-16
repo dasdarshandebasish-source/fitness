@@ -1,4 +1,4 @@
-const CACHE = "debasish-discipline-v2";
+const CACHE = "debasish-discipline-v4-scoring";
 const ASSETS = [
   "./",
   "./index.html",

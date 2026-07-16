@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Debasish — Flexible 30-Day Discipline Dashboard</title>
+<title>Debasish — Discipline Dashboard v4</title>
 
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -110,7 +110,96 @@ h3{font-size:16px;margin:0 0 8px}
 .duration-row{display:grid;grid-template-columns:1fr 130px 130px;gap:10px;align-items:end}
 .inline-note{font-size:12px;color:var(--muted);margin-top:5px}
 .badge{display:inline-block;padding:5px 8px;border-radius:999px;background:#283440;color:#b8d8f4;font-size:12px;margin-left:8px}
+
 .source a{color:var(--accent2)}
+.score-dashboard{display:grid;gap:16px}
+.score-wheels{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.score-wheel-card{
+  position:relative;overflow:hidden;text-align:center;
+  background:linear-gradient(145deg,#171d25,#10151b);
+  border:1px solid var(--line);border-radius:18px;padding:20px 14px
+}
+.score-wheel-card:after{
+  content:"";position:absolute;inset:auto -30% -65% -30%;height:130px;
+  background:radial-gradient(circle,rgba(88,166,255,.13),transparent 68%);
+  pointer-events:none
+}
+.score-ring{
+  --score:0;--ring-color:var(--accent2);
+  width:132px;height:132px;border-radius:50%;margin:4px auto 14px;
+  display:grid;place-items:center;
+  background:conic-gradient(var(--ring-color) calc(var(--score)*1%),#26303a 0);
+  position:relative;box-shadow:inset 0 0 0 1px rgba(255,255,255,.04)
+}
+.score-ring:before{
+  content:"";position:absolute;inset:12px;border-radius:50%;
+  background:linear-gradient(145deg,#161c24,#0d1117);
+  border:1px solid rgba(255,255,255,.05)
+}
+.score-ring-value{position:relative;z-index:1;font-size:31px;font-weight:850;letter-spacing:-1px}
+.score-ring-value small{font-size:14px;color:var(--muted);font-weight:650}
+.score-name{font-weight:800;font-size:16px}
+.score-caption{font-size:12px;color:var(--muted);margin-top:5px;min-height:30px}
+.score-summary{
+  display:grid;grid-template-columns:1.15fr .85fr;gap:16px
+}
+.score-grade{
+  display:flex;align-items:center;gap:15px;padding:18px;border-radius:16px;
+  background:linear-gradient(135deg,#132519,#152135);border:1px solid var(--line)
+}
+.score-grade-icon{
+  width:54px;height:54px;border-radius:16px;display:grid;place-items:center;
+  background:#1d3425;font-size:27px
+}
+.score-grade-title{font-size:24px;font-weight:850;margin-bottom:4px}
+.score-breakdown{display:grid;gap:12px}
+.score-break-row{display:grid;grid-template-columns:155px 1fr 48px;gap:10px;align-items:center}
+.score-break-label{font-size:13px;color:#d4dbe3}
+.score-track{height:9px;background:#252c35;border-radius:100px;overflow:hidden}
+.score-track span{display:block;height:100%;border-radius:100px;background:linear-gradient(90deg,var(--accent2),var(--accent))}
+.score-break-value{text-align:right;font-weight:750;font-size:13px}
+.score-insight{
+  border-left:4px solid var(--accent2);background:#111923;border-radius:12px;
+  padding:14px 16px;line-height:1.55;color:#c8d0d9;font-size:14px
+}
+.score-checklist{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:14px}
+.score-check{
+  display:flex;align-items:flex-start;gap:9px;padding:12px;border:1px solid var(--line);
+  border-radius:12px;background:#10151b;color:#d7dee6;font-size:13px;line-height:1.35
+}
+.score-check input{width:20px;height:20px;min-height:auto;accent-color:var(--accent);flex:0 0 auto}
+.score-history{display:flex;gap:10px;overflow-x:auto;padding:4px 2px 10px;scroll-snap-type:x proximity}
+.history-card{
+  min-width:128px;scroll-snap-align:start;border:1px solid var(--line);
+  border-radius:14px;padding:12px;background:#11171e
+}
+.history-card.selected{border-color:var(--accent2);box-shadow:0 0 0 1px var(--accent2)}
+.history-date{font-size:12px;color:var(--muted);margin-bottom:8px}
+.history-score{font-size:27px;font-weight:850}
+.history-mini{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-top:10px}
+.history-mini span{font-size:10px;color:var(--muted)}
+.history-mini strong{display:block;color:var(--text);font-size:12px;margin-top:2px}
+.score-empty{padding:20px;color:var(--muted);text-align:center;border:1px dashed var(--line);border-radius:14px}
+.mini-score-line{
+  display:flex;justify-content:space-between;align-items:center;margin-top:13px;
+  padding-top:13px;border-top:1px solid var(--line);color:var(--muted);font-size:13px
+}
+.mini-score-line strong{font-size:20px;color:var(--accent)}
+@media(max-width:1050px){
+  .score-wheels{grid-template-columns:1fr 1fr}
+  .score-summary{grid-template-columns:1fr}
+  .score-checklist{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+  .score-wheels{grid-template-columns:1fr 1fr;gap:10px}
+  .score-wheel-card{padding:15px 8px}
+  .score-ring{width:108px;height:108px}
+  .score-ring:before{inset:10px}
+  .score-ring-value{font-size:26px}
+  .score-checklist{grid-template-columns:1fr}
+  .score-break-row{grid-template-columns:112px 1fr 40px}
+}
+
 @media(max-width:950px){
  .shell{grid-template-columns:1fr}.sidebar{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line)}
  .nav{grid-template-columns:repeat(3,1fr)}.main{padding:20px 14px 50px}
@@ -141,7 +230,7 @@ button,.btn,.nav button,input,select,textarea{min-height:44px}
 <body>
 <div class="shell">
 <aside class="sidebar">
-  <div class="brand">Flexible Discipline Dashboard</div>
+  <div class="brand">Discipline Dashboard v4</div>
   <div class="sub">A default plan you can adapt to real life.</div>
   <div class="clock" id="clock">--:--</div>
   <div class="date" id="clockDate"></div>
@@ -151,6 +240,7 @@ button,.btn,.nav button,input,select,textarea{min-height:44px}
     <button data-view="fitness">Fitness</button>
     <button data-view="study">Study Plan</button>
     <button data-view="dayeditor">Edit Day</button>
+    <button data-view="scores">Daily Scores</button>
     <button data-view="tracker">Tracker</button>
     <button data-view="settings">Settings</button>
   </nav>
@@ -187,12 +277,15 @@ button,.btn,.nav button,input,select,textarea{min-height:44px}
         <div class="actions">
           <button class="btn primary" onclick="setView('dayeditor')">Edit today’s timeline</button>
           <button class="btn warn" id="quickIndoor">Make today indoor</button>
+          <button class="btn good" id="calendarKeyDay">Add key sessions to Calendar</button>
+          <button class="btn" id="calendarAllDay">Add every block to Calendar</button>
         </div>
       </div>
       <div class="card">
         <h3>Today’s completion</h3>
         <div class="timer" id="bigProgress">0%</div>
         <div class="muted">Tick each block when completed. Your custom plan and records are saved locally.</div>
+        <div class="mini-score-line"><span>Current daily score</span><strong id="todayOverallScore">0%</strong></div>
       </div>
     </div>
     <div class="warning danger"><strong>Health safety:</strong> because you previously reported hypertension and an average resting heart rate above 100, obtain medical clearance before vigorous exercise. Keep walking conversational, breathe normally during strength exercises, and stop for chest pain, faintness, unusual breathlessness or strong palpitations.</div>
@@ -234,6 +327,15 @@ button,.btn,.nav button,input,select,textarea{min-height:44px}
         <div class="field"><label>Evening snack actual</label><textarea id="actualEveningSnack"></textarea></div>
         <div class="field"><label>Dinner actual</label><textarea id="actualDinner"></textarea></div>
         <div class="field"><label>Hunger, cravings or digestion notes</label><textarea id="actualMealNotes"></textarea></div>
+      </div>
+      <h3 style="margin-top:18px">Meal-quality check-in</h3>
+      <p class="muted">These five quick checks make the meal score more meaningful without trying to judge free-text food entries.</p>
+      <div class="score-checklist">
+        <label class="score-check"><input type="checkbox" id="mealProtein"><span>Protein included across the main meals</span></label>
+        <label class="score-check"><input type="checkbox" id="mealVegetables"><span>Vegetables included at lunch and dinner</span></label>
+        <label class="score-check"><input type="checkbox" id="mealLeafy"><span>Leafy vegetables included today</span></label>
+        <label class="score-check"><input type="checkbox" id="mealNoSugary"><span>No sugary drink or alcohol</span></label>
+        <label class="score-check"><input type="checkbox" id="mealPortion"><span>Portions stayed controlled</span></label>
       </div>
       <div class="actions"><button class="btn good" id="saveActualMeals">Save what I ate</button><button class="btn" id="copyPlannedMeals">Copy planned meals as actual</button></div>
     </div>
@@ -323,6 +425,79 @@ button,.btn,.nav button,input,select,textarea{min-height:44px}
     </div>
   </section>
 
+  <section id="scores" class="view">
+    <div class="warning"><strong>What the score means:</strong> this is an adherence and consistency score—not a medical grade and not a judgement of your worth. It updates from saved checkboxes, actual meal/workout/study logs, steps, sleep and screen time.</div>
+    <div class="score-dashboard">
+      <div class="score-wheels">
+        <div class="score-wheel-card">
+          <div class="score-ring" id="overallRing"><div class="score-ring-value"><span id="overallScore">0</span><small>%</small></div></div>
+          <div class="score-name">Overall</div>
+          <div class="score-caption">Fitness, meals, study and daily discipline</div>
+        </div>
+        <div class="score-wheel-card">
+          <div class="score-ring" id="fitnessRing"><div class="score-ring-value"><span id="fitnessScore">0</span><small>%</small></div></div>
+          <div class="score-name">Fitness</div>
+          <div class="score-caption">Movement blocks, workout minutes and steps</div>
+        </div>
+        <div class="score-wheel-card">
+          <div class="score-ring" id="mealRing"><div class="score-ring-value"><span id="mealScore">0</span><small>%</small></div></div>
+          <div class="score-name">Meals</div>
+          <div class="score-caption">Meal follow-through, food log and quality checks</div>
+        </div>
+        <div class="score-wheel-card">
+          <div class="score-ring" id="studyRing"><div class="score-ring-value"><span id="studyScore">0</span><small>%</small></div></div>
+          <div class="score-name">Study</div>
+          <div class="score-caption">Focused minutes, completed blocks and outputs</div>
+        </div>
+      </div>
+
+      <div class="score-summary">
+        <div class="score-grade">
+          <div class="score-grade-icon" id="scoreGradeIcon">↗</div>
+          <div>
+            <div class="score-grade-title" id="scoreGradeTitle">Start logging the day</div>
+            <div class="muted" id="scoreGradeText">The score improves automatically as you save completed work.</div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Overall weighting</h3>
+          <div class="muted">Fitness 25% · Meals 25% · Study 35% · Routine discipline 15%</div>
+          <div class="actions">
+            <button class="btn primary" id="refreshScores">Recalculate now</button>
+            <button class="btn good" id="finaliseDay">Save end-of-day snapshot</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid2">
+        <div class="card">
+          <h2>Fitness breakdown</h2>
+          <div id="fitnessBreakdown" class="score-breakdown"></div>
+        </div>
+        <div class="card">
+          <h2>Meal breakdown</h2>
+          <div id="mealBreakdown" class="score-breakdown"></div>
+        </div>
+        <div class="card">
+          <h2>Study breakdown</h2>
+          <div id="studyBreakdown" class="score-breakdown"></div>
+        </div>
+        <div class="card">
+          <h2>Routine discipline</h2>
+          <div id="routineBreakdown" class="score-breakdown"></div>
+        </div>
+      </div>
+
+      <div class="score-insight" id="scoreInsight">Log the day to receive a focused improvement suggestion.</div>
+
+      <div class="card">
+        <h2>30-day score history</h2>
+        <p class="muted">Only days with saved activity appear. Scores recalculate from the latest saved records unless you have saved an end-of-day snapshot.</p>
+        <div id="scoreHistory" class="score-history"></div>
+      </div>
+    </div>
+  </section>
+
   <section id="tracker" class="view">
     <div class="card block">
       <h2>Daily health and productivity record</h2>
@@ -361,6 +536,17 @@ button,.btn,.nav button,input,select,textarea{min-height:44px}
       <div class="actions"><button class="btn primary" id="saveSettings">Save settings</button><button class="btn dangerbtn" id="resetAll">Reset all app data</button></div>
       <p class="muted">Open this app by double-clicking <strong>index.html</strong>. The Terminal launcher is not required.</p>
     </div>
+    <div class="card block">
+      <h2>iPhone Calendar notifications</h2>
+      <p class="muted">Export the selected day after making any meal, workout, study or timestamp changes. Each event contains an Apple Calendar alert set for 10 minutes before the session.</p>
+      <div class="actions">
+        <button class="btn good" id="calendarKeySettings">Export selected day — key sessions</button>
+        <button class="btn" id="calendarAllSettings">Export selected day — every block</button>
+        <button class="btn primary" id="calendarAll30">Export all 30 days — key sessions</button>
+      </div>
+      <p class="inline-note"><strong>Key sessions</strong> include meals, workouts, study and career blocks. Routine blocks such as showering and planning are excluded. If you later change a time, delete or edit the old Calendar event before importing the revised day to avoid duplicates.</p>
+    </div>
+
     <div class="card source">
       <h2>Health basis and limits</h2>
       <p class="muted">This is an organizational tool, not diagnosis or individualized medical treatment. Review major diet or exercise changes with your clinician, particularly because of hypertension, fatty liver and the previously reported elevated resting pulse.</p>
@@ -459,9 +645,10 @@ function setView(name){
   document.querySelectorAll(".nav button").forEach(v=>v.classList.remove("active"));
   $(name).classList.add("active");
   document.querySelector(`.nav button[data-view="${name}"]`).classList.add("active");
-  const titles={today:"Today’s operating plan",meals:"Editable meals and actual food log",fitness:"Editable fitness plan",study:"Flexible study allocation",dayeditor:"Master daily timeline editor",tracker:"Daily tracker and timer",settings:"Settings and health notes"};
+  const titles={today:"Today’s operating plan",meals:"Editable meals and actual food log",fitness:"Editable fitness plan",study:"Flexible study allocation",dayeditor:"Master daily timeline editor",scores:"Automatic daily scoring",tracker:"Daily tracker and timer",settings:"Settings and health notes"};
   $("pageTitle").textContent=titles[name];
   if(name==="dayeditor") renderDayEditor();
+  if(name==="scores") renderScores();
 }
 document.querySelectorAll(".nav button").forEach(b=>b.onclick=()=>setView(b.dataset.view));
 
@@ -475,7 +662,7 @@ function render(){
   $("modeBanner").classList.toggle("show",!!adj);
   $("modeBanner").textContent=adj?`Today’s adjustment: ${adj}`:"";
   renderTimeline(p);renderMeals(p);renderFitness(p);renderStudy(p);renderDayEditor();
-  loadActualMeals();loadActualWorkout();loadActualStudy();loadTracker();updateProgress();
+  loadActualMeals();loadActualWorkout();loadActualStudy();loadTracker();updateProgress();renderScores();
 }
 function renderTimeline(p){
   $("timeline").innerHTML=p.timeline.map((x,i)=>`
@@ -492,7 +679,7 @@ function renderTimeline(p){
     c.closest(".timeline-content").classList.toggle("complete",c.checked);
     c.onchange=()=>{
       localStorage.setItem(storageKey("task-"+c.dataset.index),c.checked?"1":"0");
-      c.closest(".timeline-content").classList.toggle("complete",c.checked);updateProgress();
+      c.closest(".timeline-content").classList.toggle("complete",c.checked);updateProgress();renderScores();
     };
   });
   highlightCurrent();
@@ -590,6 +777,9 @@ function loadActualMeals(){
  ["Breakfast","MorningSnack","Lunch","EveningSnack","Dinner","MealNotes"].forEach(k=>{
    const id="actual"+k; if($(id)) $(id).value=d[k.charAt(0).toLowerCase()+k.slice(1)]||"";
  });
+ ["Protein","Vegetables","Leafy","NoSugary","Portion"].forEach(k=>{
+   const el=$("meal"+k);if(el)el.checked=!!d["quality"+k];
+ });
 }
 function loadActualWorkout(){
  const d=JSON.parse(localStorage.getItem(storageKey("actualWorkout"))||"{}");
@@ -642,8 +832,13 @@ $("saveMeals").onclick=()=>{
 };
 $("resetMeals").onclick=()=>{deleteCustomPart("meal");render()};
 $("saveActualMeals").onclick=()=>{
- const d={breakfast:$("actualBreakfast").value,morningSnack:$("actualMorningSnack").value,lunch:$("actualLunch").value,eveningSnack:$("actualEveningSnack").value,dinner:$("actualDinner").value,mealNotes:$("actualMealNotes").value};
- localStorage.setItem(storageKey("actualMeals"),JSON.stringify(d));alert("Actual meals saved.");
+ const d={
+  breakfast:$("actualBreakfast").value,morningSnack:$("actualMorningSnack").value,lunch:$("actualLunch").value,
+  eveningSnack:$("actualEveningSnack").value,dinner:$("actualDinner").value,mealNotes:$("actualMealNotes").value,
+  qualityProtein:$("mealProtein").checked,qualityVegetables:$("mealVegetables").checked,
+  qualityLeafy:$("mealLeafy").checked,qualityNoSugary:$("mealNoSugary").checked,qualityPortion:$("mealPortion").checked
+ };
+ localStorage.setItem(storageKey("actualMeals"),JSON.stringify(d));renderScores();alert("Actual meals saved and the meal score was recalculated.");
 };
 $("copyPlannedMeals").onclick=()=>{
  const m=effectivePlan().meal;$("actualBreakfast").value=m.breakfast;$("actualMorningSnack").value=m.morning_snack;$("actualLunch").value=m.lunch;$("actualEveningSnack").value=m.evening_snack;$("actualDinner").value=m.dinner;
@@ -678,7 +873,7 @@ $("recoveryWorkout").onclick=()=>{
  ]};setCustom(c);render();
 };
 $("saveActualWorkout").onclick=()=>{
- localStorage.setItem(storageKey("actualWorkout"),JSON.stringify({workout:$("actualWorkout").value,minutes:$("actualWorkoutMinutes").value,effort:$("actualWorkoutEffort").value,notes:$("actualWorkoutNotes").value}));alert("Actual workout saved.");
+ localStorage.setItem(storageKey("actualWorkout"),JSON.stringify({workout:$("actualWorkout").value,minutes:$("actualWorkoutMinutes").value,effort:$("actualWorkoutEffort").value,notes:$("actualWorkoutNotes").value}));renderScores();alert("Actual workout saved and the fitness score was recalculated.");
 };
 $("copyPlannedWorkout").onclick=()=>{$("actualWorkout").value=effectivePlan().workout.items.join("\n")};
 
@@ -692,7 +887,7 @@ $("saveStudy").onclick=()=>{
 $("resetStudy").onclick=()=>{const c=getCustom();delete c.study;delete c.studyTimes;delete c.studyDurations;setCustom(c);render()};
 $("saveActualStudy").onclick=()=>{
  const d={};studyMeta.forEach(m=>d[m.key]={minutes:$(`actualStudyMinutes_${m.key}`).value,note:$(`actualStudyNote_${m.key}`).value});d.carryForward=$("studyCarryForward").value;
- localStorage.setItem(storageKey("actualStudy"),JSON.stringify(d));alert("Actual study record saved.");
+ localStorage.setItem(storageKey("actualStudy"),JSON.stringify(d));renderScores();alert("Actual study record saved and the study score was recalculated.");
 };
 $("carryToTomorrow").onclick=()=>{
  if(selectedDay>=plans.length-1){alert("This is the final day of the current plan.");return}
@@ -711,9 +906,349 @@ $("saveDayAdjustment").onclick=()=>{localStorage.setItem(storageKey("adjustment"
 $("quickIndoor").onclick=()=>{const c=getCustom();c.timeline=makeIndoorTimeline(effectivePlan().timeline);setCustom(c);localStorage.setItem(storageKey("adjustment"),"Indoor day: outdoor movement has been replaced with treadmill or safe indoor walking.");render()};
 $("indoorWorkout").onclick = $("indoorWorkout").onclick;
 
+
+
+function dayStorageKey(index,suffix){
+  return `debasish-plan-${plans[index].date}-${suffix}`;
+}
+function readJSONKey(key,fallback={}){
+  try{return JSON.parse(localStorage.getItem(key)||JSON.stringify(fallback))}
+  catch(e){return fallback}
+}
+function clampScore(value){return Math.max(0,Math.min(100,Math.round(Number(value)||0)))}
+function blockCategory(block){
+  const type=String(block.type||"").toLowerCase();
+  const text=(String(block.title||"")+" "+String(block.detail||"")).toLowerCase();
+  if(type==="food"||/(breakfast|lunch|dinner|snack|meal)/.test(text))return "meal";
+  if(type==="fitness"||/(workout|fitness|treadmill|walk|yoga|mobility|stretch|cardio)/.test(text))return "fitness";
+  if(type==="study"||type==="career"||/(study|deep work|rag|langchain|python|dsa|leetcode|sql|datalemur|portfolio|job|career|interview|mock)/.test(text))return "study";
+  return "routine";
+}
+function completedRatioForCategory(index,category){
+  const p=effectivePlanForIndex(index);
+  const positions=p.timeline.map((b,i)=>({b,i})).filter(x=>blockCategory(x.b)===category);
+  if(!positions.length)return 0;
+  const done=positions.filter(x=>localStorage.getItem(dayStorageKey(index,"task-"+x.i))==="1").length;
+  return done/positions.length;
+}
+function allTimelineRatio(index){
+  const p=effectivePlanForIndex(index);
+  if(!p.timeline.length)return 0;
+  return p.timeline.filter((_,i)=>localStorage.getItem(dayStorageKey(index,"task-"+i))==="1").length/p.timeline.length;
+}
+function progressiveStepTarget(index){
+  const week=Math.floor(index/7)+1;
+  return week===1?7000:week===2?8000:week===3?9000:week===4?10000:8000;
+}
+function workoutMinuteTarget(index){
+  const p=effectivePlanForIndex(index);
+  const name=String(p.workout?.name||"").toLowerCase();
+  if(name.includes("recovery"))return 25;
+  if(name.includes("long")||name.includes("cardio"))return 45;
+  return 40;
+}
+function plannedStudyMinutes(index){
+  const previous=selectedDay;selectedDay=index;
+  const c=getCustom(),durations=c.studyDurations||{};
+  selectedDay=previous;
+  return studyMeta.reduce((sum,m)=>sum+(Number(durations[m.key])||defaultDuration(m.key)),0);
+}
+function actualStudyMinutes(index){
+  const d=readJSONKey(dayStorageKey(index,"actualStudy"),{});
+  const detailed=studyMeta.reduce((sum,m)=>sum+(Number(d[m.key]?.minutes)||0),0);
+  const tracker=readJSONKey(dayStorageKey(index,"tracker"),{});
+  return Math.max(detailed,(Number(tracker.studyHours)||0)*60);
+}
+function ratio(value,target){
+  if(!target)return 0;
+  return Math.max(0,Math.min(1,(Number(value)||0)/target));
+}
+function scoreBreak(label,earned,max){
+  return {label,earned:Math.round(earned*10)/10,max,percentage:max?clampScore(earned/max*100):0};
+}
+function calculateScoresForIndex(index){
+  const tracker=readJSONKey(dayStorageKey(index,"tracker"),{});
+  const workout=readJSONKey(dayStorageKey(index,"actualWorkout"),{});
+  const meals=readJSONKey(dayStorageKey(index,"actualMeals"),{});
+  const study=readJSONKey(dayStorageKey(index,"actualStudy"),{});
+
+  const fitnessTimeline=completedRatioForCategory(index,"fitness");
+  const workoutTarget=workoutMinuteTarget(index);
+  const workoutMinutes=Number(workout.minutes)||0;
+  const stepTarget=progressiveStepTarget(index);
+  const steps=Number(tracker.steps)||0;
+  const workoutLogged=String(workout.workout||"").trim().length>0||workoutMinutes>0;
+  const fitnessBreakdown=[
+    scoreBreak("Movement blocks",fitnessTimeline*35,35),
+    scoreBreak(`Workout minutes (${workoutTarget} target)`,ratio(workoutMinutes,workoutTarget)*35,35),
+    scoreBreak(`Steps (${stepTarget.toLocaleString()} target)`,ratio(steps,stepTarget)*20,20),
+    scoreBreak("Workout logged",workoutLogged?10:0,10)
+  ];
+  const fitness=clampScore(fitnessBreakdown.reduce((s,x)=>s+x.earned,0));
+
+  const mealTimeline=completedRatioForCategory(index,"meal");
+  const mealKeys=["breakfast","morningSnack","lunch","eveningSnack","dinner"];
+  const mealsLogged=mealKeys.filter(k=>String(meals[k]||"").trim()).length;
+  const qualityKeys=["qualityProtein","qualityVegetables","qualityLeafy","qualityNoSugary","qualityPortion"];
+  const qualityDone=qualityKeys.filter(k=>!!meals[k]).length;
+  const mealBreakdown=[
+    scoreBreak("Meal-time blocks",mealTimeline*25,25),
+    scoreBreak("Actual meals recorded",mealsLogged/5*25,25),
+    scoreBreak("Food-quality checks",qualityDone/5*50,50)
+  ];
+  const meal=clampScore(mealBreakdown.reduce((s,x)=>s+x.earned,0));
+
+  const studyTimeline=completedRatioForCategory(index,"study");
+  const plannedMinutes=plannedStudyMinutes(index);
+  const completedMinutes=actualStudyMinutes(index);
+  const leetcode=Number(tracker.leetcode)||0;
+  const datalemur=Number(tracker.datalemur)||0;
+  const applications=Number(tracker.applications)||0;
+  const studyBreakdown=[
+    scoreBreak(`Focused minutes (${plannedMinutes} planned)`,ratio(completedMinutes,plannedMinutes)*55,55),
+    scoreBreak("Study/career blocks",studyTimeline*25,25),
+    scoreBreak("LeetCode output",ratio(leetcode,2)*10,10),
+    scoreBreak("DataLemur output",ratio(datalemur,1)*5,5),
+    scoreBreak("Remote-job actions",ratio(applications,3)*5,5)
+  ];
+  const studyScore=clampScore(studyBreakdown.reduce((s,x)=>s+x.earned,0));
+
+  const timelineRatio=allTimelineRatio(index);
+  const sleepHours=Number(tracker.sleep)||0;
+  const screenMinutes=Number(tracker.screen)||0;
+  let screenRatio=0;
+  if(screenMinutes>0){
+    if(screenMinutes<=120)screenRatio=1;
+    else if(screenMinutes<=180)screenRatio=.75;
+    else if(screenMinutes<=240)screenRatio=.5;
+    else if(screenMinutes<=360)screenRatio=.25;
+  }
+  const routineBreakdown=[
+    scoreBreak("Whole-day follow-through",timelineRatio*40,40),
+    scoreBreak("Sleep (7.5-hour target)",ratio(sleepHours,7.5)*30,30),
+    scoreBreak("Phone/screen control",screenRatio*30,30)
+  ];
+  const routine=clampScore(routineBreakdown.reduce((s,x)=>s+x.earned,0));
+
+  const overall=clampScore(fitness*.25+meal*.25+studyScore*.35+routine*.15);
+  return {
+    overall,fitness,meal,study:studyScore,routine,
+    fitnessBreakdown,mealBreakdown,studyBreakdown,routineBreakdown,
+    inputs:{steps,stepTarget,workoutMinutes,workoutTarget,plannedMinutes,completedMinutes,mealsLogged,qualityDone,sleepHours,screenMinutes}
+  };
+}
+function hasDayScoreData(index){
+  const suffixes=["tracker","actualWorkout","actualMeals","actualStudy","scoreSnapshot"];
+  if(suffixes.some(s=>localStorage.getItem(dayStorageKey(index,s))))return true;
+  const p=effectivePlanForIndex(index);
+  return p.timeline.some((_,i)=>localStorage.getItem(dayStorageKey(index,"task-"+i))==="1");
+}
+function scoreGrade(score){
+  if(score>=90)return {title:"Excellent execution",text:"A highly consistent day. Protect the same structure tomorrow.",icon:"★"};
+  if(score>=75)return {title:"Strong day",text:"You completed the important work. Improve the weakest category rather than adding more tasks.",icon:"↗"};
+  if(score>=60)return {title:"Good foundation",text:"The day moved forward. One focused correction can make tomorrow substantially better.",icon:"✓"};
+  if(score>=40)return {title:"Partial win",text:"Some useful work happened. Reset the next block instead of judging the entire day.",icon:"→"};
+  if(score>0)return {title:"Low-data or difficult day",text:"Save your actual meals, workout, study time and tracker details for a fairer score.",icon:"○"};
+  return {title:"Start logging the day",text:"The score improves automatically as you save completed work.",icon:"＋"};
+}
+function setRing(id,value,color){
+  const el=$(id);if(!el)return;
+  el.style.setProperty("--score",clampScore(value));
+  el.style.setProperty("--ring-color",color);
+}
+function renderBreakdown(containerId,items){
+  const el=$(containerId);if(!el)return;
+  el.innerHTML=items.map(x=>`
+    <div class="score-break-row">
+      <div class="score-break-label">${escapeHtml(x.label)}</div>
+      <div class="score-track"><span style="width:${x.percentage}%"></span></div>
+      <div class="score-break-value">${Math.round(x.earned)}/${x.max}</div>
+    </div>`).join("");
+}
+function weakestInsight(scores){
+  const categories=[
+    {name:"fitness",score:scores.fitness,text:"Complete the planned movement blocks and record workout minutes or steps."},
+    {name:"meals",score:scores.meal,text:"Record what you actually ate and complete the five food-quality checks."},
+    {name:"study",score:scores.study,text:"Protect one deep-work block and record actual focused minutes, even when the original schedule changes."},
+    {name:"routine",score:scores.routine,text:"Improve sleep, screen control, or whole-day follow-through rather than adding more goals."}
+  ].sort((a,b)=>a.score-b.score);
+  if(scores.overall>=90)return "Excellent day. Keep tomorrow realistic instead of increasing every target.";
+  return `Best next improvement: ${categories[0].text}`;
+}
+function renderScoreHistory(){
+  const el=$("scoreHistory");if(!el)return;
+  const cards=[];
+  for(let i=0;i<plans.length;i++){
+    if(!hasDayScoreData(i))continue;
+    const saved=readJSONKey(dayStorageKey(i,"scoreSnapshot"),null);
+    const s=saved?.scores||calculateScoresForIndex(i);
+    cards.push(`
+      <div class="history-card ${i===selectedDay?"selected":""}" data-history-day="${i}">
+        <div class="history-date">Day ${i+1} · ${escapeHtml(plans[i].weekday.slice(0,3))}</div>
+        <div class="history-score">${s.overall}%</div>
+        <div class="history-mini">
+          <span>Fit<strong>${s.fitness}</strong></span>
+          <span>Meal<strong>${s.meal}</strong></span>
+          <span>Study<strong>${s.study}</strong></span>
+        </div>
+      </div>`);
+  }
+  el.innerHTML=cards.length?cards.join(""):'<div class="score-empty">No scored days yet. Complete and save part of today’s plan to begin the history.</div>';
+  document.querySelectorAll("[data-history-day]").forEach(card=>card.onclick=()=>{
+    selectedDay=Number(card.dataset.historyDay);$("daySelect").value=selectedDay;render();
+  });
+}
+function renderScores(){
+  if(!$("overallScore"))return;
+  const s=calculateScoresForIndex(selectedDay);
+  $("overallScore").textContent=s.overall;$("fitnessScore").textContent=s.fitness;
+  $("mealScore").textContent=s.meal;$("studyScore").textContent=s.study;
+  if($("todayOverallScore"))$("todayOverallScore").textContent=s.overall+"%";
+  setRing("overallRing",s.overall,"var(--accent2)");
+  setRing("fitnessRing",s.fitness,"var(--fit)");
+  setRing("mealRing",s.meal,"var(--food)");
+  setRing("studyRing",s.study,"var(--study)");
+  const grade=scoreGrade(s.overall);
+  $("scoreGradeTitle").textContent=grade.title;$("scoreGradeText").textContent=grade.text;$("scoreGradeIcon").textContent=grade.icon;
+  renderBreakdown("fitnessBreakdown",s.fitnessBreakdown);
+  renderBreakdown("mealBreakdown",s.mealBreakdown);
+  renderBreakdown("studyBreakdown",s.studyBreakdown);
+  renderBreakdown("routineBreakdown",s.routineBreakdown);
+  $("scoreInsight").textContent=weakestInsight(s);
+  renderScoreHistory();
+  if(hasDayScoreData(selectedDay)){
+    localStorage.setItem(dayStorageKey(selectedDay,"liveScore"),JSON.stringify({updatedAt:new Date().toISOString(),scores:s}));
+  }
+}
+function saveScoreSnapshot(){
+  const s=calculateScoresForIndex(selectedDay);
+  localStorage.setItem(dayStorageKey(selectedDay,"scoreSnapshot"),JSON.stringify({savedAt:new Date().toISOString(),scores:s}));
+  renderScores();alert(`End-of-day score saved: ${s.overall}%. You may still update the day and save a new snapshot later.`);
+}
+
+function calendarDateForIndex(index){
+  const startString=(appSettings().startDate||defaultStart);
+  const start=new Date(startString+"T00:00:00");
+  start.setDate(start.getDate()+index);
+  return `${start.getFullYear()}-${String(start.getMonth()+1).padStart(2,"0")}-${String(start.getDate()).padStart(2,"0")}`;
+}
+function effectivePlanForIndex(index){
+  const previous=selectedDay;
+  selectedDay=index;
+  const result=effectivePlan();
+  selectedDay=previous;
+  return result;
+}
+function icsEscape(value){
+  return String(value??"")
+    .replace(/\\/g,"\\\\")
+    .replace(/\n/g,"\\n")
+    .replace(/,/g,"\\,")
+    .replace(/;/g,"\\;");
+}
+function utcStamp(dateString,timeString){
+  const match=String(timeString).match(/(\d+):(\d+)\s*(AM|PM)/i);
+  if(!match)return null;
+  let hour=Number(match[1]), minute=Number(match[2]);
+  const ap=match[3].toUpperCase();
+  if(ap==="PM"&&hour<12)hour+=12;
+  if(ap==="AM"&&hour===12)hour=0;
+  const [year,month,day]=dateString.split("-").map(Number);
+  // Convert India Standard Time (UTC+05:30) to UTC explicitly.
+  const dt=new Date(Date.UTC(year,month-1,day,hour-5,minute-30,0));
+  return dt.toISOString().replace(/[-:]/g,"").replace(/\.\d{3}Z$/,"Z");
+}
+function addMinutesToUtcStamp(stamp,minutes){
+  const y=Number(stamp.slice(0,4)),mo=Number(stamp.slice(4,6))-1,d=Number(stamp.slice(6,8));
+  const h=Number(stamp.slice(9,11)),mi=Number(stamp.slice(11,13)),s=Number(stamp.slice(13,15));
+  return new Date(Date.UTC(y,mo,d,h,mi,s)+minutes*60000).toISOString().replace(/[-:]/g,"").replace(/\.\d{3}Z$/,"Z");
+}
+function isKeyCalendarBlock(block){
+  const type=String(block.type||"").toLowerCase();
+  if(["food","fitness","study","career"].includes(type))return true;
+  const text=(String(block.title)+" "+String(block.detail)).toLowerCase();
+  return /(breakfast|lunch|dinner|snack|workout|fitness|treadmill|walk|rag|langchain|python|dsa|leetcode|sql|datalemur|portfolio|job|interview|study)/.test(text);
+}
+function buildCalendarEvents(index,mode){
+  const p=effectivePlanForIndex(index),dateString=calendarDateForIndex(index);
+  const blocks=p.timeline.filter(b=>mode==="all"||isKeyCalendarBlock(b));
+  return blocks.map((block,i)=>{
+    const start=utcStamp(dateString,block.time);
+    if(!start)return null;
+    let duration=45;
+    const sourceIndex=p.timeline.findIndex(x=>x===block);
+    if(sourceIndex>=0&&sourceIndex<p.timeline.length-1){
+      const thisMin=parseTime(block.time),nextMin=parseTime(p.timeline[sourceIndex+1].time);
+      if(thisMin!==null&&nextMin!==null){
+        let diff=nextMin-thisMin;if(diff<=0)diff+=24*60;
+        duration=Math.max(15,Math.min(180,diff));
+      }
+    }
+    const end=addMinutesToUtcStamp(start,duration);
+    const uid=`debasish-${dateString}-${start}-${i}-${mode}@discipline-dashboard`;
+    return [
+      "BEGIN:VEVENT",
+      `UID:${uid}`,
+      `DTSTAMP:${new Date().toISOString().replace(/[-:]/g,"").replace(/\.\d{3}Z$/,"Z")}`,
+      `DTSTART:${start}`,
+      `DTEND:${end}`,
+      `SUMMARY:${icsEscape(block.title)}`,
+      `DESCRIPTION:${icsEscape(block.detail+"\\n\\nOpen the Discipline dashboard for today’s complete plan.")}`,
+      "BEGIN:VALARM",
+      "TRIGGER:-PT10M",
+      "ACTION:DISPLAY",
+      `DESCRIPTION:${icsEscape("Next session in 10 minutes: "+block.title)}`,
+      "END:VALARM",
+      "END:VEVENT"
+    ].join("\r\n");
+  }).filter(Boolean);
+}
+function downloadCalendar(indices,mode,filename){
+  const events=indices.flatMap(index=>buildCalendarEvents(index,mode));
+  if(!events.length){alert("No valid timed sessions were found.");return}
+  const ics=[
+    "BEGIN:VCALENDAR",
+    "VERSION:2.0",
+    "PRODID:-//Debasish Discipline Dashboard//EN",
+    "CALSCALE:GREGORIAN",
+    "METHOD:PUBLISH",
+    "X-WR-CALNAME:Discipline Dashboard",
+    ...events,
+    "END:VCALENDAR"
+  ].join("\r\n");
+  const blob=new Blob([ics],{type:"text/calendar;charset=utf-8"});
+  const url=URL.createObjectURL(blob),a=document.createElement("a");
+  a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+  alert("Calendar file created. Open the downloaded .ics file on your iPhone and add the events to Calendar. Each event has a 10-minute alert.");
+}
+function exportSelectedCalendar(mode){
+  const date=calendarDateForIndex(selectedDay);
+  downloadCalendar([selectedDay],mode,`discipline-${date}-${mode}.ics`);
+}
+
+function bindScoreControls(){
+  const refresh=$("refreshScores");if(refresh)refresh.onclick=renderScores;
+  const finish=$("finaliseDay");if(finish)finish.onclick=saveScoreSnapshot;
+  ["mealProtein","mealVegetables","mealLeafy","mealNoSugary","mealPortion"].forEach(id=>{
+    const el=$(id);if(el)el.onchange=renderScores;
+  });
+}
+
+function bindCalendarButtons(){
+  const bindings=[
+    ["calendarKeyDay",()=>exportSelectedCalendar("key")],
+    ["calendarAllDay",()=>exportSelectedCalendar("all")],
+    ["calendarKeySettings",()=>exportSelectedCalendar("key")],
+    ["calendarAllSettings",()=>exportSelectedCalendar("all")],
+    ["calendarAll30",()=>downloadCalendar(plans.map((_,i)=>i),"key","discipline-30-days-key-sessions.ics")]
+  ];
+  bindings.forEach(([id,fn])=>{const el=$(id);if(el)el.onclick=fn});
+}
+
 const trackerFields=["weight","waist","bp","pulse","sleep","steps","screen","studyHours","leetcode","datalemur","applications","energy"];
 function loadTracker(){const d=JSON.parse(localStorage.getItem(storageKey("tracker"))||"{}");trackerFields.forEach(f=>$(f).value=d[f]??"")}
-$("saveTracker").onclick=()=>{const d={};trackerFields.forEach(f=>d[f]=$(f).value);localStorage.setItem(storageKey("tracker"),JSON.stringify(d));alert("Today’s record saved.")};
+$("saveTracker").onclick=()=>{const d={};trackerFields.forEach(f=>d[f]=$(f).value);localStorage.setItem(storageKey("tracker"),JSON.stringify(d));renderScores();alert("Today’s record and automatic scores were saved.")};
 $("exportData").onclick=()=>{
  const payload={settings:appSettings(),exportedAt:new Date().toISOString(),storage:{}};
  for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k.startsWith("debasish-plan"))payload.storage[k]=localStorage.getItem(k)}
@@ -742,7 +1277,7 @@ $("saveSettings").onclick=()=>{
 };
 $("resetAll").onclick=()=>{if(confirm("Delete all customized plans, logs, checkboxes and settings?")){Object.keys(localStorage).filter(k=>k.startsWith("debasish-plan")).forEach(k=>localStorage.removeItem(k));location.reload()}};
 $("daySelect").onchange=e=>{selectedDay=+e.target.value;render()};
-populateDaySelect();loadSettings();render();
+populateDaySelect();loadSettings();render();bindCalendarButtons();bindScoreControls();
 </script>
 
 <script>
